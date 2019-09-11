@@ -1,34 +1,25 @@
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+  push-image:
+    machine: true
+    steps:
+      - checkout
+      - run: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+      - run: docker build --rm=false -t eu.gcr.io/${GCP_PROJECT}/${IMAGE_NAME}:$CIRCLE_SHA1 .
+      - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+      - run: gcloud --quiet config set project ${GCP_PROJECT}
+      - run: gcloud docker -- push eu.gcr.io/${GCP_PROJECT}/${IMAGE_NAME}:$CIRCLE_SHA1
+    
 # see https://circleci.com/docs/2.0/workflows/
 workflows:
   version: 2
   build-and-push-image:
     jobs:
       - build
-      - push-image:
-          requires:
-            - build
-            
-  jobs:
-    build:
-      docker:
-        - image: circleci/node:latest
-
-      steps:
-        - checkout
-
-        - setup_remote_docker:
-            docker_layer_caching: false
-
-      # https://circleci.com/docs/2.0/google-auth/
-      # https://circleci.com/docs/2.0/google-container-engine/
-      # https://cloud.google.com/container-registry/docs/pushing
-    push-image:
-      machine: true
-      steps:
-        - checkout
-        - run: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
-        - run: docker build --rm=false -t eu.gcr.io/${GCP_PROJECT}/${IMAGE_NAME}:$CIRCLE_SHA1 .
-        - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
-        - run: gcloud --quiet config set project ${GCP_PROJECT}
-        - run: gcloud docker -- push eu.gcr.io/${GCP_PROJECT}/${IMAGE_NAME}:$CIRCLE_SHA1
-        
+      - push-image   
