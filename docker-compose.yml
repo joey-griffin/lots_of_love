@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+
+  jirhub:
+    image: jirhub
+    container_name: jirhub
+    build:
+      context: .
+      dockerfile: ./DockerFile
+    ports:
+      - "9340:9340"
+      - "9341:9341"
