@@ -1,6 +1,4 @@
 import React from 'react';
-import { GithubPanel } from './github/GithubPanel';
-import { JiraPanel } from './jira/JiraPanel';
 
 type HomeProps = {
     stories: []
@@ -17,14 +15,7 @@ export class Home extends React.Component<HomeProps, HomeState> {
     render() {
         return (
             <>
-                <div className="row mt-3">
-                    <div className="col-sm-6">
-                        <GithubPanel />
-                    </div>
-                    <div className="col-sm-6">
-                        <JiraPanel />
-                    </div>
-                </div>
+                <h1 className="display-1 text-center mt-5">Under Construction</h1>
             </>
         );
     }
