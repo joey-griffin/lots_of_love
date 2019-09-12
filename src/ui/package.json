@@ -19,7 +19,7 @@
     "typescript": "3.5.1"
   },
   "scripts": {
-    "start": "set HTTPS=true && set PORT=8080 && react-scripts start",
+    "start": "set PORT=8080 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
