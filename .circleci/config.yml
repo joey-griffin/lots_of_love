@@ -15,8 +15,6 @@ jobs:
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
       - run: gcloud --quiet config set project ${GCP_PROJECT}
       - run: gcloud docker -- push eu.gcr.io/${GCP_PROJECT}/${IMAGE_NAME}:$CIRCLE_SHA1
-      - run: gcloud components install beta
-      - run: gcloud components update
       - run: gcloud beta run deploy --image eu.gcr.io/${GCP_PROJECT}/${IMAGE_NAME} --platform managed
     
 # see https://circleci.com/docs/2.0/workflows/
