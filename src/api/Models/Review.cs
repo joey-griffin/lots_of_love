@@ -1,13 +1,10 @@
-using Newtonsoft.Json;
-
 namespace api.Models
 {
-    public class Review
+    public sealed class Review
     {
-        [JsonProperty("user")]
-        public User User { get; set; }
-
-        [JsonProperty("state")]
-        public string State { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public string TopicId { get; set; }
+        public string Email { get; set; }
     }
 }

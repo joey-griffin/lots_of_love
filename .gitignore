@@ -1,2 +1,3 @@
 src/api/bin
 src/api/obj
+src/api/appsettings.local.json
