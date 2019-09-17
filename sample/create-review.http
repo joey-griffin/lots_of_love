@@ -1,0 +1,9 @@
+POST http://localhost:9341/api/reviews
+Content-Type: application/json
+
+{
+    "title": "kaboom",
+    "text": "kaboom text",
+    "topicId": "1",
+    "email": "really.crap.ceo@gmail.com"
+}

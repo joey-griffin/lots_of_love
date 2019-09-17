@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,7 +24,10 @@ namespace api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
 
-            services.AddSingleton<IDataService, DataService>();
+            services.AddSingleton<IReviewService, ReviewService>();
+
+            GlobalSettings.GmailUsername = Environment.GetEnvironmentVariable("GmailUsername");
+            GlobalSettings.GmailPassword = Environment.GetEnvironmentVariable("GmailPassword");            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
