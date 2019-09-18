@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using api.Models;
 using MailKit.Net.Smtp;
@@ -9,11 +8,6 @@ namespace api.Services
 {
     public sealed class ReviewService : IReviewService
     {
-        private Dictionary<string, string> _validTopics = new Dictionary<string, string>
-        {
-            { "1", "Tech Recruitment" }
-        };
-
         public async Task SubmitReviewAsync(Review review)
         {
             await SendEmailToSelfAsync(review);
@@ -71,12 +65,6 @@ RC"
 
         private async Task SendEmailToSelfAsync(Review review)
         {
-            if (!_validTopics.ContainsKey(review.TopicId.Trim()))
-            {
-                throw new ArgumentException($"Invalid topic {review.TopicId}");
-            }
-
-            var topicName = _validTopics[review.TopicId.Trim()];
             var reviewerEmail = string.IsNullOrEmpty(review.Email) ? "<no email>" : review.Email.Trim();
 
             var message = new MimeMessage();
@@ -86,11 +74,11 @@ RC"
 
             message.Body = new TextPart("plain")
             {
-                Text = $@"// Topic
-{topicName}
-                
-// Title
+                Text = $@"// Title
 {review.Title.Trim()}
+                
+// Names
+{review.Name.Trim()}
 
 // Text
 {review.Text.Trim()}
