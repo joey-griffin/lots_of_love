@@ -78,7 +78,7 @@ RC"
 {review.Title.Trim()}
                 
 // Names
-{review.Names.Trim()}
+{review.Name.Trim()}
 
 // Text
 {review.Text.Trim()}
