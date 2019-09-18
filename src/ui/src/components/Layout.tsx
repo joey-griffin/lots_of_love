@@ -1,17 +1,15 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 
-type LayoutProps = { };
-type LayoutState = { };
+type LayoutProps = {};
+type LayoutState = {};
 
 export class Layout extends React.Component<LayoutProps, LayoutState> {
-    render () {
+    render() {
         return (
-            <div>
-                <Container fluid={true}>
-                    {this.props.children}
-                </Container>
-            </div>
+            <Container fluid={false}>
+                {this.props.children}
+            </Container>
         )
     }
 }
