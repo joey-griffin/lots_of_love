@@ -54,7 +54,22 @@ export class Craplist extends React.Component<CraplistProps, CraplistState> {
         let mainContent
         if (this.state.selectedReviews.length < 1) {
             mainContent = (
-                <h3 id="main-name-header">Select a name in the left panel to see what people have said</h3>
+                <>
+                    <h3 id="main-name-header">All submissions</h3>
+                    <ul className="list-group list-group-flush">
+                        {this.state.reviews.map(function (review, i) {
+                            return (
+                                <li className="list-group-item" key={i}>
+                                    <blockquote className="blockquote review-title">
+                                        <p className="mb-0">{review.title}</p>
+                                        <footer className="blockquote-footer">{review.date}</footer>
+                                    </blockquote>
+                                    <p className="review-text" key={i}>{review.text}</p>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </>
             )
         } else {
             mainContent = (
